@@ -38,7 +38,7 @@ public class AlgorithmImpl implements Algorithm {
 
         while (!openSet.isEmpty()) {
             AlgorithmNode q = openSet.poll();
-            if (q.getGraphNode() == destinationNode) {
+            if (q.getGraphNode().equals(destinationNode)) {
                 return new DistanceTimeResultImpl(q);
             }
             for (GraphEdge edge : q.getGraphNode().getEdges()) {
@@ -63,8 +63,7 @@ public class AlgorithmImpl implements Algorithm {
 
     private AlgorithmNode searchForGraphNode(final Collection<AlgorithmNode> collection, final AlgorithmNode algorithmNode) {
         for (AlgorithmNode node : collection) {
-            //TODO equals
-            if (node.getGraphNode() == algorithmNode.getGraphNode()) {
+            if (node.getGraphNode().equals(algorithmNode.getGraphNode())) {
                 return node;
             }
         }
@@ -102,7 +101,7 @@ public class AlgorithmImpl implements Algorithm {
             GraphNode q = openSet.remove(NumberUtil.ZERO);
             for (GraphEdge graphEdge : q.getEdges()) {
                 GraphNode neighbourNode = graphEdge.getEndNode();
-                if (neighbourNode == destinationNode) {
+                if (neighbourNode.equals(destinationNode)) {
                     return true;
                 }
                 if (!openSet.contains(neighbourNode) && !closedSet.contains(neighbourNode)) {

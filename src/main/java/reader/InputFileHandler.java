@@ -5,16 +5,16 @@ import navigation.GraphNode;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
+import util.NumberUtil;
 
 import java.util.ArrayList;
 
 /**
  * Created by novak on 2016.04.19..
  */
-//TODO use a proper handler name
+
 public class InputFileHandler extends DefaultHandler {
 
-    //TODO use constants
     private static final String NODE = "node";
     private static final String EDGE = "edge";
     private static final String PROPERTY = "property";
@@ -25,25 +25,19 @@ public class InputFileHandler extends DefaultHandler {
     private static final String STARTNODE = "startNode";
     private static final String ENDNODE = "endNode";
     private static final String AVERAGESPEED = "averageSpeed";
-    //TODO Boolean or boolean has the default "false"
+
     private ArrayList<GraphNode> graphNodes;
     private GraphNode graphNode;
+    private GraphEdge graphEdge;
 
-    //TODO boolean names!
     private boolean isyCoord;
     private boolean isxCoord;
-    private GraphEdge graphEdge;
     private boolean isStartNode;
     private boolean isEndNode;
     private boolean isAverageSpeed;
 
     public InputFileHandler(ArrayList<GraphNode> graphNodes) {
         this.graphNodes = graphNodes;
-        this.isyCoord = false;
-        this.isxCoord = false;
-        this.isStartNode = false;
-        this.isEndNode = false;
-        this.isAverageSpeed = false;
     }
 
     @Override
@@ -92,11 +86,11 @@ public class InputFileHandler extends DefaultHandler {
             isxCoord = false;
         }else if(isStartNode){
             int id = Integer.parseInt(new String(ch, start, length));
-            graphEdge.setStartNode(graphNodes.get(id - 1));
+            graphEdge.setStartNode(graphNodes.get(id - NumberUtil.ONE));
             isStartNode = false;
         }else if(isEndNode){
             int id = Integer.parseInt(new String(ch, start, length));
-            graphEdge.setEndNode(graphNodes.get(id-1));
+            graphEdge.setEndNode(graphNodes.get(id - NumberUtil.ONE));
             isEndNode = false;
         }else if(isAverageSpeed){
             int averageSpeed = Integer.parseInt(new String(ch, start, length));

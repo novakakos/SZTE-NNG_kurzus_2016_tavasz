@@ -53,6 +53,22 @@ public class GraphNode  {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof GraphNode)) return false;
+
+        GraphNode graphNode = (GraphNode) o;
+
+        return id == graphNode.id;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
+    }
+
+    @Override
     public String toString() {
         return "GraphNode{" +
                 "id=" + id +
